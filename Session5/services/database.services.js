@@ -18,10 +18,14 @@ class DatabaseServices {
         'Pinged your development. Your connect succesfully to MongoDB'
       );
     } catch (error) {
-      console.log('Error', error);
+      console.log(`Error`, error);
       throw new Error(error.message);
     }
   }
+  get users() {
+    return this.db.collection("users");
+  }
 }
+
 const databaseService = new DatabaseServices();
 export default databaseService;

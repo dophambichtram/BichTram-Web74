@@ -1,9 +1,21 @@
 import express from "express";
-import databaseService from "./services/database.service.js";
+import databaseService from "./services/database.services.js";
+import userRoute from "./routes/users.routes.js";
+import { config } from "dotenv";
 const app = express();
-const PORT = 4000;
+const PORT = 3000;
+app.use(express.json);
 
 databaseService.run();
+
+app.use("/users", userRoute);
+
+app.use((err, req, res, next) => {
+  return res.json({
+    error: err,
+  });
+});
+
 app.listen(PORT, (err) => {
   if (err) {
     console.log(`Error ${err.message}`);
